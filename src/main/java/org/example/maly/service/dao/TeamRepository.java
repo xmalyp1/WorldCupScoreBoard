@@ -3,6 +3,7 @@ package org.example.maly.service.dao;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Predicate;
 import org.example.maly.model.Team;
 
 /**
@@ -27,6 +28,6 @@ public class TeamRepository extends AbstractRepository<Team>{
     }
 
     public Optional<Team> getTeamByName(String name){
-        return getItems().stream().filter(team -> team.getName().equals(name)).findAny();
+        return findItem(team -> team.getName().equals(name));
     }
 }

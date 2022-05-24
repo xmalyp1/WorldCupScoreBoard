@@ -1,9 +1,10 @@
 package org.example.maly.model;
 
 import java.util.Objects;
+import java.util.StringJoiner;
 
 public class Team {
-    private String name;
+    private final String name;
 
     public Team(String name) {
         this.name = name;
@@ -11,18 +12,6 @@ public class Team {
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("Team{");
-        sb.append("name='").append(name).append('\'');
-        sb.append('}');
-        return sb.toString();
     }
 
     @Override
@@ -40,5 +29,12 @@ public class Team {
     @Override
     public int hashCode() {
         return Objects.hash(name);
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", Team.class.getSimpleName() + "[", "]")
+            .add("name='" + name + "'")
+            .toString();
     }
 }
