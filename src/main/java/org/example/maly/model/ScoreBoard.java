@@ -1,5 +1,7 @@
 package org.example.maly.model;
 
-public class ScoreBoard {
+import java.util.List;
 
+public class ScoreBoard {
+    private List<Game> games;
 }
