@@ -8,4 +8,4 @@ The lib assume that you cannot a game within the score board multiple time (use 
 - JUpiter
 
 To verify the solution run the integration test
-[integration test](../WorldCupScoreBoard/src/test/java/WorldCupScoreBoardIT.java)
+[integration test](/src/test/java/WorldCupScoreBoardIT.java)
