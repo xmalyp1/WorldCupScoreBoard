@@ -45,6 +45,7 @@ public class WorldCupScoreBoardIT {
         //expectedSortedSummary.forEach(g -> System.out.println(g.getScore()));
 
         testSummary(driver.getSummary(),expectedSortedSummary);
+        finishGames();
     }
 
     private static void populateGames() {
@@ -129,8 +130,18 @@ public class WorldCupScoreBoardIT {
         for(int i=0; i<currentSummary.size();i++){
             Assertions.assertEquals(currentSummary.get(i),expectedSummary.get(i),String.format("Game with index %d does not match!",i));
         }
+    }
 
+    private void finishGames(){
+        Game notStartedGame = buildGame("Italy","Germany");
+        Assertions.assertThrows(RuntimeException.class,()-> driver.finishGame(notStartedGame));
+        expectedSortedSummary.stream().map(game-> game.getHomeTeam().getTeam().getName()).forEach(team -> testFinishGame(team));
+        Assertions.assertTrue(gameRepository.getSortedGames().isEmpty(),"Some of the games have not been finished");
+    }
 
+    private void testFinishGame(String teamName){
+        Game game = gameRepository.findGameForTeam(teamRepository.getTeamByName(teamName).get()).orElse(null);
+        Assertions.assertDoesNotThrow(()-> driver.finishGame(game));
     }
 
     private static Game buildGame(String homeTeam, int homeScore, String awayTeam, int awayScore) {

@@ -35,7 +35,7 @@ public class FootballScoreBoardDriver implements ScoreBoardDriver {
     @Override
     public void finishGame(Game game) {
         validateArgument(game == null, "Unable to update a NULL game");
-        if( gameRepository.removeItem(game)){
+        if(!gameRepository.removeItem(game)){
             throw new IllegalArgumentException(String.format("Unable to remove the game %s",game));
         }
     }
